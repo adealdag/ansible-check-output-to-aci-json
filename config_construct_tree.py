@@ -126,12 +126,10 @@ def construct_tree(item_list):
                         if not aci_class:
                             return False
                         data_dic = {}
-                        data_dic['attributes'] = dict(dn=curr_node_dn)
-                        cursor['children'][node] = {
-                            'data': (aci_class, data_dic),
-                            'name': node,
-                            'children': {}
-                        }
+                        data_dic["attributes"] = dict(
+                            dn=curr_node_dn, name=node.split("-", 1)[1])
+                        cursor["children"][node] = {
+                            "data": (aci_class, data_dic), "children": {}}
                 cursor = cursor['children'][node]
             cursor['data'] = (nm, desc)
             cursor['name'] = path[-1]
